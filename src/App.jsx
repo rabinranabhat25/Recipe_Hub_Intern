@@ -7,6 +7,8 @@ import Recipe from './pages/Recipe'
 
 import RecipeDescription from './pagesComponent/RecipeDiscription'
 
+import ShopPage from './pages/createRecipe'
+
 
 
 function App() {
@@ -20,6 +22,8 @@ function App() {
       <Route path='/home_recipe' element={<HomeRecipe/>}/>
       <Route path='/recipe' element={<Recipe/>}/>
       <Route path='/recipe_description/:recipeId' element={<RecipeDescription/>}/>
+      <Route path='/addrecipe' element={<ShopPage/>}/>
+
      
       
       </Routes>

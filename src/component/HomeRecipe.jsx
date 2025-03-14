@@ -21,21 +21,21 @@ const HomeRecipe = () => {
     
     <>
     
-      <div className="flex flex-wrap justify-center mt-24">
+      <div className="flex flex-wrap justify-center mt-24  ">
         
-        {products.map((products) => (
-          <Link to={`/recipe_description/${products.id}`}><div
-            key={products.id}
+        {products.map((product) => (
+          <Link to={`/recipe_description/${product.id}`}><div
+            key={product.id}
             className="flex m-4 justify-center items-center"
           >
             <div className="flex flex-wrap">
               <div className="w-56 rounded-md cursor-pointer shadow-lg shadow-purple-800 overflow-hidden hover:shadow-orange-400 transform hover:scale-105 duration-500">
-                <img src={products.img} alt={products.name} />
+                <img src={product.img} alt={product.name} />
                 <div className="p-4 bg-white">
                   <span className="text-sm font-semibold text-red-50 bg-red-400 py-1 px-3 rounded-full">
-                    {products.discount}
+                    {product.discount}
                   </span>
-                  <h1 className="mt-2 font-bold text-2xl">{products.name}</h1>
+                  <h1 className="mt-2 font-bold text-2xl">{product.name}</h1>
                   <Ratings/>
                 </div>
               </div>
