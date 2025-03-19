@@ -20,7 +20,7 @@ const Feature = () => {
       <div className="flex flex-wrap justify-center mt-24">
         
         {Favourite.map((Fav) => (
-          <Link to={"/"}><div
+          <Link to={"/fav"}><div
             key={Fav.id}
             className="flex m-4 justify-center items-center"
           >

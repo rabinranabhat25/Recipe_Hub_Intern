@@ -57,9 +57,9 @@ const Footer = () => {
           </p>
           <nav class="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
             <a class="hover:opacity-75 hover:text-orange-600" href> About </a>
-            <a class="hover:opacity-75 hover:text-orange-600" href> Meet the Team </a>
+          
             <a class="hover:opacity-75 hover:text-orange-600" href> History </a>
-            <a class="hover:opacity-75 hover:text-orange-600" href> Careers </a>
+            <a class="hover:opacity-75 hover:text-orange-600" href> Careers On cooking </a>
           </nav>
         </div>
         <div>
@@ -67,11 +67,11 @@ const Footer = () => {
             Services
           </p>
           <nav class="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
-            <a class="hover:opacity-75 hover:text-orange-600" href> 1on1 Coaching </a>
+          
             <a class="hover:opacity-75 hover:text-orange-600" href> Company Review </a>
-            <a class="hover:opacity-75 hover:text-orange-600" href> Accounts Review </a>
-            <a class="hover:opacity-75 hover:text-orange-600" href> HR Consulting </a>
-            <a class="hover:opacity-75 hover:text-orange-600" href> SEO Optimisation </a>
+            <a class="hover:opacity-75 hover:text-orange-600" href> Recipe Review </a>
+          
+           
           </nav>
         </div>
         <div>

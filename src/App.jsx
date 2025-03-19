@@ -8,6 +8,7 @@ import Recipe from './pages/Recipe'
 import RecipeDescription from './pagesComponent/RecipeDiscription'
 
 import ShopPage from './pages/createRecipe'
+import Favorites from './pages/Fav'
 
 
 
@@ -23,6 +24,7 @@ function App() {
       <Route path='/recipe' element={<Recipe/>}/>
       <Route path='/recipe_description/:recipeId' element={<RecipeDescription/>}/>
       <Route path='/addrecipe' element={<ShopPage/>}/>
+      <Route path='/fav' element={<Favorites/>}/>
 
      
       

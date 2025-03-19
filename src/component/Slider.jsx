@@ -21,7 +21,7 @@ const Slider = () => {
   };
 
   return (
-    <div className="max-w-[1200px] mx-auto relative max-h-[1000px] overflow-hidden rounded-3xl mt-10 ">
+    <div className="max-w-[1200px] mx-auto relative max-h-[9000px] overflow-hidden rounded-3xl mt-10 ">
       {/* Carousel Wrapper */}
       <div className="relative h-72 rounded-lg sm:h-72 xl:h-96 2xl:h-">
         <div

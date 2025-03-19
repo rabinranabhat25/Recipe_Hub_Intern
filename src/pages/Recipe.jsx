@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import Footer from "../component/Footer";
 import NavBar from "../component/NavBar";
 import Ratings from "../component/Ratings";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Recipe = () => {
   // Sample product list with added categories
@@ -23,14 +23,30 @@ const Recipe = () => {
     { id: 14, name: "Chaat", img: "/img/Chaat.jpg", discount: "-12%", category: "Indian" },
   ];
 
-  // State for search input and category filter
+  // States for search, category filter, and favorites
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [favorites, setFavorites] = useState([]);
 
-  // List of unique categories for the dropdown (including "All")
+  // Load favorites from localStorage
+  useEffect(() => {
+    const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    setFavorites(storedFavorites);
+  }, []);
+
+  // Toggle favorite status
+  const toggleFavorite = (product) => {
+    const isFavorite = favorites.some((fav) => fav.id === product.id);
+    const updatedFavorites = isFavorite
+      ? favorites.filter((fav) => fav.id !== product.id)
+      : [...favorites, product];
+
+    setFavorites(updatedFavorites);
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+  };
+
   const categories = ["All", ...new Set(products.map((product) => product.category))];
 
-  // Filter products based on search query and selected category
   const filteredProducts = products.filter((product) => {
     const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesCategory = selectedCategory === "All" || product.category === selectedCategory;
@@ -41,27 +57,25 @@ const Recipe = () => {
     <>
       <NavBar />
       <div className="flex justify-center items-center mt-10">
-        <h2 className="text-4xl font-semibold tracking-widest transform hover:scale-95 duration-500 hover:text-orange-500 text-gray-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">
+        <h2 className="text-4xl font-semibold tracking-widest text-gray-900 uppercase">
           Food Page
         </h2>
       </div>
 
       {/* Search and Filter Section */}
       <div className="flex flex-col md:flex-row justify-center items-center mt-10 space-y-4 md:space-y-0 md:space-x-4">
-        {/* Search Input */}
         <input
           type="text"
-          placeholder="Search recipes ......"
+          placeholder="Search recipes..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-64 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+          className="w-64 p-2 border border-gray-300 rounded-md"
         />
 
-        {/* Category Dropdown */}
         <select
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
-          className="w-64 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+          className="w-64 p-2 border border-gray-300 rounded-md"
         >
           {categories.map((category) => (
             <option key={category} value={category}>
@@ -73,27 +87,36 @@ const Recipe = () => {
 
       {/* Product List */}
       <div className="flex flex-wrap justify-center mt-10">
-        {filteredProducts.length > 0 ? (
-          filteredProducts.map((product) => (
-            <Link to={`/recipe_description/${product.id}`} key={product.id}>
-              <div className="flex m-4 justify-center items-center">
-                <div className="w-56 rounded-md cursor-pointer shadow-lg shadow-purple-800 overflow-hidden hover:shadow-orange-400 transform hover:scale-105 duration-500">
-                  <img src={product.img} alt={product.name} />
-                  <div className="p-4 bg-white">
-                    <span className="text-sm font-semibold text-red-50 bg-red-400 py-1 px-3 rounded-full">
-                      {product.discount}
-                    </span>
-                    <h1 className="mt-2 font-bold text-2xl">{product.name}</h1>
-                    <Ratings />
-                  </div>
+        {filteredProducts.map((product) => (
+          <div key={product.id} className="flex m-4">
+            <Link to={`/recipe_description/${product.id}`}>
+              <div className="w-56 rounded-md shadow-lg overflow-hidden">
+                <img src={product.img} alt={product.name} />
+                <div className="p-4 bg-white flex flex-wrap">
+                  <span className="text-sm font-semibold bg-red-400 text-white py-1 px-3 rounded-full">
+                    {product.discount}
+                  </span>
+                  <h1 className="mt-2 font-bold text-2xl">{product.name}</h1>
+                  <Ratings />
+                  <button
+              onClick={(e) => {
+                e.preventDefault();
+                toggleFavorite(product);
+              }}
+              className={`p-2 ml-2 h-10 text-white rounded-md flex flex-wrap ${
+                favorites.some((fav) => fav.id === product.id) ? "bg-orange-500" : "bg-gray-500"
+              }`}
+            >
+              {favorites.some((fav) => fav.id === product.id) ? "Unfavorite" : "Favorite"}
+            </button>
                 </div>
               </div>
             </Link>
-          ))
-        ) : (
-          <p className="text-gray-500 text-lg">No products found.</p>
-        )}
+            
+          </div>
+        ))}
       </div>
+
       <Footer />
     </>
   );

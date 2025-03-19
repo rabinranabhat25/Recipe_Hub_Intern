@@ -61,13 +61,9 @@ const NavBar = () => {
                 Recipe
             </button></Link>
 
-            <Link to={"/add_recipe"}><button className="text-gray-800 transform hover:scale-105  duration-500 hover:text-green-600 focus:text-green-600 font-medium px-4 py-2 rounded-md transition duration-200 bg-gray-100">
-              Create Recipes
-            </button></Link>
+            
 
-            <button className="text-gray-800 transform hover:scale-105  duration-500 hover:text-green-600 focus:text-green-600 font-medium px-4 py-2 rounded-md transition duration-200 bg-gray-100">
-                Contact
-            </button>
+            
               
             </nav>
           </div>
